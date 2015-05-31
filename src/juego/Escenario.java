@@ -4,6 +4,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Escenario extends javax.swing.JFrame {
+    
+    Reproductor play = new Reproductor();
 
     private int numColumnas = 20;
     private int numFilas = 22;
@@ -24,6 +26,10 @@ public class Escenario extends javax.swing.JFrame {
         escLogico = crearEscenario();
 
         cargarEscenario();
+        
+        play.repSonido();
+
+        Marcador();
     }
 
     private int[][] crearEscenario() {
@@ -89,12 +95,27 @@ public class Escenario extends javax.swing.JFrame {
         }
     }
 
-    /*private void Marcador(){
-     switch(contador){
-     case 0:
-                
-     }
-     }*/
+    private void Marcador() {
+        switch (contador) {
+            case 0:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/cero.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
+            case 1:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/uno.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
+            case 2:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/dos.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
+            case 3:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/tres.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -143,7 +164,7 @@ public class Escenario extends javax.swing.JFrame {
                 break;
             case 37:    //izq
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
-
+                Marcador();
                 if (escLogico[personajeX - 1][personajeY] != Contenedor.muro) {
 
                     escLogico[personajeX - 1][personajeY] = Contenedor.personajeI;
@@ -154,13 +175,17 @@ public class Escenario extends javax.swing.JFrame {
 
                     personajeX--;
 
+                    if (escLogico[personajeX - 1][personajeY] == Contenedor.moneda) {
+                        contador++;
+                    }
+                    System.out.println(contador);
                 } else {
 
                 }
                 break;
             case 39:    //der
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
-
+                Marcador();
                 if (escLogico[personajeX + 1][personajeY] != Contenedor.muro) {
 
                     escLogico[personajeX + 1][personajeY] = Contenedor.personajeD;
@@ -170,13 +195,17 @@ public class Escenario extends javax.swing.JFrame {
 
                     personajeX++;
 
+                    if (escLogico[personajeX + 1][personajeY] == Contenedor.moneda) {
+                        contador++;
+                    }
+
                 } else {
 
                 }
                 break;
             case 38:    //arr
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeA));
-
+                Marcador();
                 if (escLogico[personajeX][personajeY - 1] != Contenedor.muro) {
 
                     escLogico[personajeX][personajeY - 1] = Contenedor.personajeA;
@@ -187,13 +216,17 @@ public class Escenario extends javax.swing.JFrame {
 
                     personajeY--;
 
+                    if (escLogico[personajeX][personajeY - 1] == Contenedor.moneda) {
+                        contador++;
+                    }
+
                 } else {
 
                 }
                 break;
             case 40:    //ab
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeAb));
-
+                Marcador();
                 if (escLogico[personajeX][personajeY + 1] != Contenedor.muro) {
 
                     escLogico[personajeX][personajeY + 1] = Contenedor.personajeAb;
@@ -203,6 +236,10 @@ public class Escenario extends javax.swing.JFrame {
                     escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
                     personajeY++;
+
+                    if (escLogico[personajeX][personajeY + 1] == Contenedor.moneda) {
+                        contador++;
+                    }
 
                 } else {
 
