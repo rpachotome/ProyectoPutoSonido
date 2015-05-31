@@ -84,8 +84,6 @@ public class Escenario extends javax.swing.JFrame {
         }
     }
     
-    
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,6 +92,11 @@ public class Escenario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEscenarioLayout = new javax.swing.GroupLayout(panelEscenario);
         panelEscenario.setLayout(panelEscenarioLayout);
@@ -120,6 +123,83 @@ public class Escenario extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+                                   
+        System.out.println(evt);
+        switch (evt.getKeyCode()) {
+            case 32:
+                break;
+            case 37:    //izq
+                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
+
+                if (escLogico[personajeX - 1][personajeY] != Contenedor.muro) {
+
+                    escLogico[personajeX - 1][personajeY] = Contenedor.personajeI;
+                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+
+                    escenario[personajeX - 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
+                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+
+                    personajeX--;
+
+                } else {
+
+                }
+                break;
+            case 39:    //der
+                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
+
+                if (escLogico[personajeX + 1][personajeY] != Contenedor.muro) {
+
+                    escLogico[personajeX + 1][personajeY] = Contenedor.personajeD;
+                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+                    escenario[personajeX + 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
+                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+
+                    personajeX++;
+
+                } else {
+
+                }
+                break;
+            case 38:    //arr
+                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeA));
+
+                if (escLogico[personajeX][personajeY - 1] != Contenedor.muro) {
+
+                    escLogico[personajeX][personajeY - 1] = Contenedor.personajeA;
+                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+
+                    escenario[personajeX][personajeY - 1].setIcon(obtenerImagen(Contenedor.personajeA));
+                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+
+                    personajeY--;
+
+                } else {
+
+                }
+                break;
+            case 40:    //ab
+                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeAb));
+
+                if (escLogico[personajeX][personajeY + 1] != Contenedor.muro) {
+
+                    escLogico[personajeX][personajeY + 1] = Contenedor.personajeAb;
+                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+
+                    escenario[personajeX][personajeY + 1].setIcon(obtenerImagen(Contenedor.personajeAb));
+                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+
+                    personajeY++;
+
+                } else {
+
+                }
+                break;
+        }
+    
+    }//GEN-LAST:event_formKeyReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
