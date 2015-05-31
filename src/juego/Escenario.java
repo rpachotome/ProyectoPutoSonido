@@ -9,6 +9,7 @@ public class Escenario extends javax.swing.JFrame {
     private int numFilas = 22;
     private int personajeX = 2;
     private int personajeY = 2;
+    private int contador = 0;
 
     public final int longImg = 40;
     public final int altImg = 40;
@@ -28,8 +29,8 @@ public class Escenario extends javax.swing.JFrame {
     private int[][] crearEscenario() {
         int[][] esc = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},//Columna
-            {1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
-            {1, 0, 10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
+            {1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 1},
+            {1, 0, 10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8, 1},
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1},
             {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},
             {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 1, 1, 1},
@@ -79,11 +80,21 @@ public class Escenario extends javax.swing.JFrame {
                 return new ImageIcon(getClass().getResource("/Imagenes/PAb.png"));
             case Contenedor.moneda:
                 return new ImageIcon(getClass().getResource("/Imagenes/Moneda.gif"));
+            case Contenedor.sigM:
+                return new ImageIcon(getClass().getResource("/Imagenes/sigM.gif"));
+            case Contenedor.sigX:
+                return new ImageIcon(getClass().getResource("/Imagenes/sigX.png"));
             default:
                 return new ImageIcon(getClass().getResource("/Imagenes/C.png"));
         }
     }
-    
+
+    /*private void Marcador(){
+     switch(contador){
+     case 0:
+                
+     }
+     }*/
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -125,7 +136,7 @@ public class Escenario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-                                   
+
         System.out.println(evt);
         switch (evt.getKeyCode()) {
             case 32:
@@ -198,7 +209,7 @@ public class Escenario extends javax.swing.JFrame {
                 }
                 break;
         }
-    
+
     }//GEN-LAST:event_formKeyReleased
 
     public static void main(String args[]) {

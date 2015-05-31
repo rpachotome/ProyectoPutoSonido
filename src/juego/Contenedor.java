@@ -10,5 +10,8 @@ public class Contenedor {
     public final static int personajeA = 12;
     public final static int personajeAb = 13;
     
+    public final static int sigM=7;
+    public final static int sigX=8;
+    
     
 }
