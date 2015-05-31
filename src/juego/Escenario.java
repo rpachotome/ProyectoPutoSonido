@@ -4,10 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Escenario extends javax.swing.JFrame {
-    
-    
-    Reproductor play = new Reproductor();
 
+    Reproductor play = new Reproductor();
+//
     private int numColumnas = 20;
     private int numFilas = 22;
     private int personajeX = 2;
@@ -25,6 +24,8 @@ public class Escenario extends javax.swing.JFrame {
     public Escenario() {
 
         initComponents();
+
+        label_bala.setVisible(false);
 
         escMatriz = crearEscenario();
 
@@ -44,13 +45,13 @@ public class Escenario extends javax.swing.JFrame {
             {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},//4
             {1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 1, 1, 1},//5
             {1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},//6
-            {1, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},//7
+            {1, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 21, 0, 0, 0, 1, 1, 1},//7
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},//8
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//9
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//10
             {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1},//11
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//12
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//13
+            {1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//13
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//14
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//15
             {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1},//16
@@ -93,6 +94,10 @@ public class Escenario extends javax.swing.JFrame {
                 return new ImageIcon(getClass().getResource("/Imagenes/sigM.gif"));
             case Contenedor.sigX:
                 return new ImageIcon(getClass().getResource("/Imagenes/sigX.png"));
+            case Contenedor.zombieD:
+                return new ImageIcon(getClass().getResource("/Imagenes/ZD.png"));
+            case Contenedor.zombieI:
+                return new ImageIcon(getClass().getResource("/Imagenes/ZI.png"));
             default:
                 return new ImageIcon(getClass().getResource("/Imagenes/C.png"));
         }
@@ -140,6 +145,7 @@ public class Escenario extends javax.swing.JFrame {
     private void initComponents() {
 
         panelEscenario = new javax.swing.JPanel();
+        label_bala = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -149,15 +155,25 @@ public class Escenario extends javax.swing.JFrame {
             }
         });
 
+        label_bala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bala.png"))); // NOI18N
+        label_bala.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        label_bala.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+
         javax.swing.GroupLayout panelEscenarioLayout = new javax.swing.GroupLayout(panelEscenario);
         panelEscenario.setLayout(panelEscenarioLayout);
         panelEscenarioLayout.setHorizontalGroup(
             panelEscenarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(panelEscenarioLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(label_bala)
+                .addContainerGap(657, Short.MAX_VALUE))
         );
         panelEscenarioLayout.setVerticalGroup(
             panelEscenarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 880, Short.MAX_VALUE)
+            .addGroup(panelEscenarioLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(label_bala)
+                .addContainerGap(772, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,6 +198,8 @@ public class Escenario extends javax.swing.JFrame {
         System.out.println(evt);
         switch (evt.getKeyCode()) {
             case 32:
+                label_bala.setVisible(true);
+
                 break;
             case 37:    //izq
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
@@ -195,11 +213,26 @@ public class Escenario extends javax.swing.JFrame {
                     escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
                     System.out.println(personajeX - 1 + " " + personajeY);
+                    //Detectar moneda en frente
                     if (escMatriz[personajeX - 2][personajeY] == Contenedor.moneda) {
                         validarX = personajeX - 2;
                         validarY = personajeY;
                         System.out.println("VX: " + validarX
                                 + " VY: " + validarY);
+                    }
+                    //detectar moneda izq
+                    if (escMatriz[personajeX - 1][personajeY + 1] == Contenedor.moneda) {
+                        validarX = personajeX - 1;
+                        validarY = personajeY + 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "izq");
+                    }
+                    //detectar moneda der
+                    if (escMatriz[personajeX - 1][personajeY - 1] == Contenedor.moneda) {
+                        validarX = personajeX - 1;
+                        validarY = personajeY - 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "der");
                     }
 
                     if (escMatriz[validarX][validarY] == Contenedor.personajeI) {
@@ -233,6 +266,20 @@ public class Escenario extends javax.swing.JFrame {
                                 + " VY: " + validarY);
 
                     }
+                    //detectar moneda der
+                    if (escMatriz[personajeX + 1][personajeY + 1] == Contenedor.moneda) {
+                        validarX = personajeX + 1;
+                        validarY = personajeY + 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "der");
+                    }
+                    //detectar moneda izq
+                    if (escMatriz[personajeX + 1][personajeY - 1] == Contenedor.moneda) {
+                        validarX = personajeX + 1;
+                        validarY = personajeY - 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "izq");
+                    }
                     if (escMatriz[validarX][validarY] == Contenedor.personajeD) {
                         contador++;
                         Marcador();
@@ -263,6 +310,20 @@ public class Escenario extends javax.swing.JFrame {
                                 + " VY: " + validarY);
 
                     }
+                    //detectar moneda der
+                    if (escMatriz[personajeX + 1][personajeY - 1] == Contenedor.moneda) {
+                        validarX = personajeX + 1;
+                        validarY = personajeY - 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "der");
+                    }
+                    //detectar moneda izq
+                    if (escMatriz[personajeX - 1][personajeY - 1] == Contenedor.moneda) {
+                        validarX = personajeX - 1;
+                        validarY = personajeY - 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "izq");
+                    }
                     if (escMatriz[validarX][validarY] == Contenedor.personajeA) {
                         contador++;
                         Marcador();
@@ -292,6 +353,20 @@ public class Escenario extends javax.swing.JFrame {
                         System.out.println("VX: " + validarX
                                 + " VY: " + validarY);
 
+                    }
+                    //detectar moneda izq
+                    if (escMatriz[personajeX + 1][personajeY + 1] == Contenedor.moneda) {
+                        validarX = personajeX + 1;
+                        validarY = personajeY + 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "izq");
+                    }
+                    //detectar moneda ser
+                    if (escMatriz[personajeX - 1][personajeY + 1] == Contenedor.moneda) {
+                        validarX = personajeX - 1;
+                        validarY = personajeY + 1;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY + "der");
                     }
                     if (escMatriz[validarX][validarY] == Contenedor.personajeAb) {
                         contador++;
@@ -341,6 +416,7 @@ public class Escenario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel label_bala;
     private javax.swing.JPanel panelEscenario;
     // End of variables declaration//GEN-END:variables
 }
