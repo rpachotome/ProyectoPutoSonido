@@ -5,28 +5,31 @@ import javax.swing.JLabel;
 
 public class Escenario extends javax.swing.JFrame {
     
+    
     Reproductor play = new Reproductor();
 
     private int numColumnas = 20;
     private int numFilas = 22;
     private int personajeX = 2;
     private int personajeY = 2;
-    private int contador = 0;
+    int contador = 0;
 
     public final int longImg = 40;
     public final int altImg = 40;
 
-    private int[][] escLogico = new int[numColumnas][numFilas];
-    private JLabel[][] escenario = new JLabel[numColumnas][numFilas];
+    private int validarX;
+    private int validarY;
+    private int[][] escMatriz = new int[numColumnas][numFilas];
+    JLabel[][] escenario = new JLabel[numColumnas][numFilas];
 
     public Escenario() {
 
         initComponents();
 
-        escLogico = crearEscenario();
+        escMatriz = crearEscenario();
 
         cargarEscenario();
-        
+
         play.repSonido();
 
         Marcador();
@@ -35,25 +38,25 @@ public class Escenario extends javax.swing.JFrame {
     private int[][] crearEscenario() {
         int[][] esc = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},//Columna
-            {1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 1},
-            {1, 0, 10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 1, 1, 1},
-            {1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},
-            {1, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1},
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1},
-            {1, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+            {1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 1},//1
+            {1, 0, 10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8, 1},//2
+            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1},//3
+            {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},//4
+            {1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 1, 1, 1},//5
+            {1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},//6
+            {1, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},//7
+            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},//8
+            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//9
+            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//10
+            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1},//11
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//12
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//13
+            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//14
+            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//15
+            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1},//16
+            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1},//17
+            {1, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},//18
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}//19
         };
         return esc;
     }
@@ -64,7 +67,7 @@ public class Escenario extends javax.swing.JFrame {
                 escenario[c][f] = new JLabel();
                 escenario[c][f].setOpaque(true);
                 escenario[c][f].setBounds((c * longImg), (f * altImg), longImg, altImg);
-                escenario[c][f].setIcon(obtenerImagen(escLogico[c][f]));
+                escenario[c][f].setIcon(obtenerImagen(escMatriz[c][f]));
                 panelEscenario.add(escenario[c][f]);
             }
         }
@@ -113,6 +116,22 @@ public class Escenario extends javax.swing.JFrame {
                 escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/tres.png")));
                 panelEscenario.add(escenario[3][20]);
                 break;
+            case 4:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/cuatro.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
+            case 5:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/cinco.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
+            case 6:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/seis.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
+            case 7:
+                escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/siete.png")));
+                panelEscenario.add(escenario[3][20]);
+                break;
         }
     }
 
@@ -152,6 +171,8 @@ public class Escenario extends javax.swing.JFrame {
             .addComponent(panelEscenario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        panelEscenario.getAccessibleContext().setAccessibleParent(panelEscenario);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -164,85 +185,123 @@ public class Escenario extends javax.swing.JFrame {
                 break;
             case 37:    //izq
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
-                Marcador();
-                if (escLogico[personajeX - 1][personajeY] != Contenedor.muro) {
 
-                    escLogico[personajeX - 1][personajeY] = Contenedor.personajeI;
-                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+                if (escMatriz[personajeX - 1][personajeY] != Contenedor.muro) {
+
+                    escMatriz[personajeX - 1][personajeY] = Contenedor.personajeI;
+                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
                     escenario[personajeX - 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
                     escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
+                    System.out.println(personajeX - 1 + " " + personajeY);
+                    if (escMatriz[personajeX - 2][personajeY] == Contenedor.moneda) {
+                        validarX = personajeX - 2;
+                        validarY = personajeY;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY);
+                    }
+
+                    if (escMatriz[validarX][validarY] == Contenedor.personajeI) {
+                        contador++;
+                        Marcador();
+                    }
+
                     personajeX--;
 
-                    if (escLogico[personajeX - 1][personajeY] == Contenedor.moneda) {
-                        contador++;
-                    }
-                    System.out.println(contador);
+                    System.out.println("C: " + contador);
                 } else {
-
+                    //sonido 
                 }
                 break;
             case 39:    //der
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
-                Marcador();
-                if (escLogico[personajeX + 1][personajeY] != Contenedor.muro) {
 
-                    escLogico[personajeX + 1][personajeY] = Contenedor.personajeD;
-                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+                if (escMatriz[personajeX + 1][personajeY] != Contenedor.muro) {
+
+                    escMatriz[personajeX + 1][personajeY] = Contenedor.personajeD;
+                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
+
                     escenario[personajeX + 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
                     escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
+                    System.out.println(personajeX + 1 + " " + personajeY);
+                    if (escMatriz[personajeX + 2][personajeY] == Contenedor.moneda) {
+                        validarX = personajeX + 2;
+                        validarY = personajeY;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY);
+
+                    }
+                    if (escMatriz[validarX][validarY] == Contenedor.personajeD) {
+                        contador++;
+                        Marcador();
+                    }
                     personajeX++;
 
-                    if (escLogico[personajeX + 1][personajeY] == Contenedor.moneda) {
-                        contador++;
-                    }
-
+                    System.out.println("C: " + contador);
                 } else {
-
+                    //sonido 
                 }
                 break;
             case 38:    //arr
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeA));
-                Marcador();
-                if (escLogico[personajeX][personajeY - 1] != Contenedor.muro) {
 
-                    escLogico[personajeX][personajeY - 1] = Contenedor.personajeA;
-                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+                if (escMatriz[personajeX][personajeY - 1] != Contenedor.muro) {
+
+                    escMatriz[personajeX][personajeY - 1] = Contenedor.personajeA;
+                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
                     escenario[personajeX][personajeY - 1].setIcon(obtenerImagen(Contenedor.personajeA));
                     escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
+                    System.out.println(personajeX + " " + (personajeY - 1));
+                    if (escMatriz[personajeX][personajeY - 2] == Contenedor.moneda) {
+                        validarX = personajeX;
+                        validarY = personajeY - 2;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY);
+
+                    }
+                    if (escMatriz[validarX][validarY] == Contenedor.personajeA) {
+                        contador++;
+                        Marcador();
+                    }
                     personajeY--;
 
-                    if (escLogico[personajeX][personajeY - 1] == Contenedor.moneda) {
-                        contador++;
-                    }
-
+                    System.out.println("C: " + contador);
                 } else {
-
+                    //sonido 
                 }
                 break;
             case 40:    //ab
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeAb));
-                Marcador();
-                if (escLogico[personajeX][personajeY + 1] != Contenedor.muro) {
 
-                    escLogico[personajeX][personajeY + 1] = Contenedor.personajeAb;
-                    escLogico[personajeX][personajeY] = Contenedor.suelo;
+                if (escMatriz[personajeX][personajeY + 1] != Contenedor.muro) {
+
+                    escMatriz[personajeX][personajeY + 1] = Contenedor.personajeAb;
+                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
                     escenario[personajeX][personajeY + 1].setIcon(obtenerImagen(Contenedor.personajeAb));
                     escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
+                    System.out.println(personajeX + " " + (personajeY + 1));
+                    if (escMatriz[personajeX][personajeY + 2] == Contenedor.moneda) {
+                        validarX = personajeX;
+                        validarY = personajeY + 2;
+                        System.out.println("VX: " + validarX
+                                + " VY: " + validarY);
+
+                    }
+                    if (escMatriz[validarX][validarY] == Contenedor.personajeAb) {
+                        contador++;
+                        Marcador();
+                    }
                     personajeY++;
 
-                    if (escLogico[personajeX][personajeY + 1] == Contenedor.moneda) {
-                        contador++;
-                    }
-
+                    System.out.println("C: " + contador);
                 } else {
-
+                    //sonido 
                 }
                 break;
         }
