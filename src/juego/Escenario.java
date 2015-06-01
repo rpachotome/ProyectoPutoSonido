@@ -5,7 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Escenario extends javax.swing.JFrame {
-
+    
+    CrearEscenario crear = new CrearEscenario();
     Reproductor play = new Reproductor();
 //
     private int numColumnas = 20;
@@ -31,7 +32,7 @@ public class Escenario extends javax.swing.JFrame {
 
         label_bala.setVisible(false);
 
-        escMatriz = crearEscenario();
+        escMatriz = crear.crearEscenario();
 
         cargarEscenario();
 
@@ -43,76 +44,15 @@ public class Escenario extends javax.swing.JFrame {
 
     }
 
-    private int[][] crearEscenario() {
-        int[][] esc = {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},//Columna
-            {1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 1},//1
-            {1, 0, 10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 8, 1},//2
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1},//3
-            {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},//4
-            {1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 1, 1, 1},//5
-            {1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 4, 1},//6
-            {1, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 21, 0, 0, 0, 1, 4, 1},//7
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 4, 1},//8
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//9
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//10
-            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1},//11
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},//12
-            {1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},//13
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 1},//14
-            {1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},//15
-            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1},//16
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 1},//17
-            {1, 0, 2, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},//18
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}//19
-        };
-        return esc;
-    }
-
     private void cargarEscenario() {
         for (int c = 0; c < numColumnas; c++) {
             for (int f = 0; f < numFilas; f++) {
                 escenario[c][f] = new JLabel();
                 escenario[c][f].setOpaque(true);
                 escenario[c][f].setBounds((c * longImg), (f * altImg), longImg, altImg);
-                escenario[c][f].setIcon(obtenerImagen(escMatriz[c][f]));
+                escenario[c][f].setIcon(crear.obtenerImagen(escMatriz[c][f]));
                 panelEscenario.add(escenario[c][f]);
             }
-        }
-    }
-
-    private ImageIcon obtenerImagen(int nImg) {
-        switch (nImg) {
-            case Contenedor.suelo:
-                return new ImageIcon(getClass().getResource("/Imagenes/C.png"));
-            case Contenedor.muro:
-                return new ImageIcon(getClass().getResource("/Imagenes/M.png"));
-            case Contenedor.personajeD:
-                return new ImageIcon(getClass().getResource("/Imagenes/PD.png"));
-            case Contenedor.personajeI:
-                return new ImageIcon(getClass().getResource("/Imagenes/PI.png"));
-            case Contenedor.personajeA:
-                return new ImageIcon(getClass().getResource("/Imagenes/PArr.png"));
-            case Contenedor.personajeAb:
-                return new ImageIcon(getClass().getResource("/Imagenes/PAb.png"));
-            case Contenedor.moneda:
-                return new ImageIcon(getClass().getResource("/Imagenes/Moneda.gif"));
-            case Contenedor.sigM:
-                return new ImageIcon(getClass().getResource("/Imagenes/sigM.gif"));
-            case Contenedor.sigX:
-                return new ImageIcon(getClass().getResource("/Imagenes/sigX.png"));
-            case Contenedor.zombieD:
-                return new ImageIcon(getClass().getResource("/Imagenes/ZD.png"));
-            case Contenedor.zombieI:
-                return new ImageIcon(getClass().getResource("/Imagenes/ZI.png"));
-            case Contenedor.live:
-                return new ImageIcon(getClass().getResource("/Imagenes/L.gif"));
-            case Contenedor.bala:
-                return new ImageIcon(getClass().getResource("/Imagenes/B.gif"));
-            case Contenedor.municion:
-                return new ImageIcon(getClass().getResource("/Imagenes/BI.png"));
-            default:
-                return new ImageIcon(getClass().getResource("/Imagenes/C.png"));
         }
     }
 
@@ -260,7 +200,7 @@ public class Escenario extends javax.swing.JFrame {
 
                 break;
             case 37:    //izq
-                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
+                escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.personajeI));
 
                 if (escMatriz[personajeX - 1][personajeY] != Contenedor.muro) {
                     if (escMatriz[personajeX - 1][personajeY] != Contenedor.zombieD) {
@@ -269,8 +209,8 @@ public class Escenario extends javax.swing.JFrame {
                             escMatriz[personajeX - 1][personajeY] = Contenedor.personajeI;
                             escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                            escenario[personajeX - 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
-                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX - 1][personajeY].setIcon(crear.obtenerImagen(Contenedor.personajeI));
+                            escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.suelo));
 
                             System.out.println(personajeX - 1 + " " + personajeY);
                             //Detectar moneda en frente
@@ -316,7 +256,7 @@ public class Escenario extends javax.swing.JFrame {
                 System.out.println(contVida);
                 break;
             case 39:    //der
-                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
+                escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.personajeD));
 
                 if (escMatriz[personajeX + 1][personajeY] != Contenedor.muro) {
                     if (escMatriz[personajeX + 1][personajeY] != Contenedor.zombieD) {
@@ -325,8 +265,8 @@ public class Escenario extends javax.swing.JFrame {
                             escMatriz[personajeX + 1][personajeY] = Contenedor.personajeD;
                             escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                            escenario[personajeX + 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
-                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX + 1][personajeY].setIcon(crear.obtenerImagen(Contenedor.personajeD));
+                            escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.suelo));
 
                             System.out.println(personajeX + 1 + " " + personajeY);
                             if (escMatriz[personajeX + 2][personajeY] == Contenedor.moneda) {
@@ -370,7 +310,7 @@ public class Escenario extends javax.swing.JFrame {
                 System.out.println(contVida);
                 break;
             case 38:    //arr
-                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeA));
+                escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.personajeA));
 
                 if (escMatriz[personajeX][personajeY - 1] != Contenedor.muro) {
                     if (escMatriz[personajeX][personajeY - 1] != Contenedor.zombieD) {
@@ -379,8 +319,8 @@ public class Escenario extends javax.swing.JFrame {
                             escMatriz[personajeX][personajeY - 1] = Contenedor.personajeA;
                             escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                            escenario[personajeX][personajeY - 1].setIcon(obtenerImagen(Contenedor.personajeA));
-                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX][personajeY - 1].setIcon(crear.obtenerImagen(Contenedor.personajeA));
+                            escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.suelo));
 
                             System.out.println(personajeX + " " + (personajeY - 1));
                             if (escMatriz[personajeX][personajeY - 2] == Contenedor.moneda) {
@@ -424,7 +364,7 @@ public class Escenario extends javax.swing.JFrame {
                 System.out.println(contVida);
                 break;
             case 40:    //ab
-                escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeAb));
+                escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.personajeAb));
 
                 if (escMatriz[personajeX][personajeY + 1] != Contenedor.muro) {
                     if (escMatriz[personajeX][personajeY + 1] != Contenedor.zombieD) {
@@ -433,8 +373,8 @@ public class Escenario extends javax.swing.JFrame {
                             escMatriz[personajeX][personajeY + 1] = Contenedor.personajeAb;
                             escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                            escenario[personajeX][personajeY + 1].setIcon(obtenerImagen(Contenedor.personajeAb));
-                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX][personajeY + 1].setIcon(crear.obtenerImagen(Contenedor.personajeAb));
+                            escenario[personajeX][personajeY].setIcon(crear.obtenerImagen(Contenedor.suelo));
 
                             System.out.println(personajeX + " " + (personajeY + 1));
                             if (escMatriz[personajeX][personajeY + 2] == Contenedor.moneda) {
