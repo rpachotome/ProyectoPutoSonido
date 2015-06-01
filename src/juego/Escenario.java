@@ -13,7 +13,8 @@ public class Escenario extends javax.swing.JFrame {
     private int personajeX = 2;
     private int personajeY = 2;
     int contador = 0;
-
+    
+    int contBalas = 1;
     int contVida = 3;
 
     public final int longImg = 40;
@@ -37,6 +38,8 @@ public class Escenario extends javax.swing.JFrame {
         play.repSonido();
 
         Marcador();
+        
+        Cargador();
 
     }
 
@@ -54,8 +57,8 @@ public class Escenario extends javax.swing.JFrame {
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//9
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//10
             {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1},//11
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1},//12
-            {1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1},//13
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},//12
+            {1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},//13
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 1},//14
             {1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},//15
             {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1},//16
@@ -163,6 +166,33 @@ public class Escenario extends javax.swing.JFrame {
             panelEscenario.add(escenario[7][20]);
 
             JOptionPane.showMessageDialog(null, "HAS MUERTO");
+            
+            ;
+        }
+    }
+    
+    public void Cargador(){
+        if(contBalas==1){
+            escenario[12][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[12][20]);
+        }else if(contBalas==2){
+            escenario[13][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[13][20]);
+        }else if(contBalas==3){
+            escenario[14][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[14][20]);
+        }else if(contBalas==4){
+            escenario[15][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[15][20]);
+        }else if(contBalas==5){
+            escenario[16][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[16][20]);
+            
+        }else if(contBalas==6){
+            escenario[17][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[17][20]);
+        }else{
+            JOptionPane.showMessageDialog(null, "NO HAY MUNICION");
         }
     }
 
@@ -174,7 +204,6 @@ public class Escenario extends javax.swing.JFrame {
         label_bala = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);
@@ -226,7 +255,8 @@ public class Escenario extends javax.swing.JFrame {
 
             case 32:
                 label_bala.setVisible(true);
-                label_bala.setBounds(personajeX, personajeY, 10, 10);
+                contBalas++;
+                Cargador();
 
                 break;
             case 37:    //izq
