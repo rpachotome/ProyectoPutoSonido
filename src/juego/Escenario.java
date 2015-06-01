@@ -197,6 +197,7 @@ public class Escenario extends javax.swing.JFrame {
 
         System.out.println(evt);
         switch (evt.getKeyCode()) {
+
             case 32:
                 label_bala.setVisible(true);
 
@@ -205,44 +206,48 @@ public class Escenario extends javax.swing.JFrame {
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
 
                 if (escMatriz[personajeX - 1][personajeY] != Contenedor.muro) {
+                    if (escMatriz[personajeX - 1][personajeY] != Contenedor.zombieD) {
+                        if (escMatriz[personajeX - 1][personajeY] != Contenedor.zombieI) {
 
-                    escMatriz[personajeX - 1][personajeY] = Contenedor.personajeI;
-                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
+                            escMatriz[personajeX - 1][personajeY] = Contenedor.personajeI;
+                            escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                    escenario[personajeX - 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
-                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX - 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeI));
+                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
-                    System.out.println(personajeX - 1 + " " + personajeY);
-                    //Detectar moneda en frente
-                    if (escMatriz[personajeX - 2][personajeY] == Contenedor.moneda) {
-                        validarX = personajeX - 2;
-                        validarY = personajeY;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY);
+                            System.out.println(personajeX - 1 + " " + personajeY);
+                            //Detectar moneda en frente
+                            if (escMatriz[personajeX - 2][personajeY] == Contenedor.moneda) {
+                                validarX = personajeX - 2;
+                                validarY = personajeY;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY);
+                            }
+                            //detectar moneda izq
+                            if (escMatriz[personajeX - 1][personajeY + 1] == Contenedor.moneda) {
+                                validarX = personajeX - 1;
+                                validarY = personajeY + 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "izq");
+                            }
+                            //detectar moneda der
+                            if (escMatriz[personajeX - 1][personajeY - 1] == Contenedor.moneda) {
+                                validarX = personajeX - 1;
+                                validarY = personajeY - 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "der");
+                            }
+
+                            if (escMatriz[validarX][validarY] == Contenedor.personajeI) {
+                                contador++;
+                                Marcador();
+                            }
+
+                            personajeX--;
+
+                            System.out.println("C: " + contador);
+                        }
                     }
-                    //detectar moneda izq
-                    if (escMatriz[personajeX - 1][personajeY + 1] == Contenedor.moneda) {
-                        validarX = personajeX - 1;
-                        validarY = personajeY + 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "izq");
-                    }
-                    //detectar moneda der
-                    if (escMatriz[personajeX - 1][personajeY - 1] == Contenedor.moneda) {
-                        validarX = personajeX - 1;
-                        validarY = personajeY - 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "der");
-                    }
-
-                    if (escMatriz[validarX][validarY] == Contenedor.personajeI) {
-                        contador++;
-                        Marcador();
-                    }
-
-                    personajeX--;
-
-                    System.out.println("C: " + contador);
                 } else {
                     //sonido 
                 }
@@ -251,42 +256,46 @@ public class Escenario extends javax.swing.JFrame {
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
 
                 if (escMatriz[personajeX + 1][personajeY] != Contenedor.muro) {
+                    if (escMatriz[personajeX + 1][personajeY] != Contenedor.zombieD) {
+                        if (escMatriz[personajeX + 1][personajeY] != Contenedor.zombieI) {
 
-                    escMatriz[personajeX + 1][personajeY] = Contenedor.personajeD;
-                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
+                            escMatriz[personajeX + 1][personajeY] = Contenedor.personajeD;
+                            escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                    escenario[personajeX + 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
-                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX + 1][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
+                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
-                    System.out.println(personajeX + 1 + " " + personajeY);
-                    if (escMatriz[personajeX + 2][personajeY] == Contenedor.moneda) {
-                        validarX = personajeX + 2;
-                        validarY = personajeY;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY);
+                            System.out.println(personajeX + 1 + " " + personajeY);
+                            if (escMatriz[personajeX + 2][personajeY] == Contenedor.moneda) {
+                                validarX = personajeX + 2;
+                                validarY = personajeY;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY);
 
+                            }
+                            //detectar moneda der
+                            if (escMatriz[personajeX + 1][personajeY + 1] == Contenedor.moneda) {
+                                validarX = personajeX + 1;
+                                validarY = personajeY + 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "der");
+                            }
+                            //detectar moneda izq
+                            if (escMatriz[personajeX + 1][personajeY - 1] == Contenedor.moneda) {
+                                validarX = personajeX + 1;
+                                validarY = personajeY - 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "izq");
+                            }
+                            if (escMatriz[validarX][validarY] == Contenedor.personajeD) {
+                                contador++;
+                                Marcador();
+                            }
+                            personajeX++;
+
+                            System.out.println("C: " + contador);
+                        }
                     }
-                    //detectar moneda der
-                    if (escMatriz[personajeX + 1][personajeY + 1] == Contenedor.moneda) {
-                        validarX = personajeX + 1;
-                        validarY = personajeY + 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "der");
-                    }
-                    //detectar moneda izq
-                    if (escMatriz[personajeX + 1][personajeY - 1] == Contenedor.moneda) {
-                        validarX = personajeX + 1;
-                        validarY = personajeY - 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "izq");
-                    }
-                    if (escMatriz[validarX][validarY] == Contenedor.personajeD) {
-                        contador++;
-                        Marcador();
-                    }
-                    personajeX++;
-
-                    System.out.println("C: " + contador);
                 } else {
                     //sonido 
                 }
@@ -295,42 +304,46 @@ public class Escenario extends javax.swing.JFrame {
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeA));
 
                 if (escMatriz[personajeX][personajeY - 1] != Contenedor.muro) {
+                    if (escMatriz[personajeX][personajeY - 1] != Contenedor.zombieD) {
+                        if (escMatriz[personajeX][personajeY - 1] != Contenedor.zombieI) {
 
-                    escMatriz[personajeX][personajeY - 1] = Contenedor.personajeA;
-                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
+                            escMatriz[personajeX][personajeY - 1] = Contenedor.personajeA;
+                            escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                    escenario[personajeX][personajeY - 1].setIcon(obtenerImagen(Contenedor.personajeA));
-                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX][personajeY - 1].setIcon(obtenerImagen(Contenedor.personajeA));
+                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
-                    System.out.println(personajeX + " " + (personajeY - 1));
-                    if (escMatriz[personajeX][personajeY - 2] == Contenedor.moneda) {
-                        validarX = personajeX;
-                        validarY = personajeY - 2;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY);
+                            System.out.println(personajeX + " " + (personajeY - 1));
+                            if (escMatriz[personajeX][personajeY - 2] == Contenedor.moneda) {
+                                validarX = personajeX;
+                                validarY = personajeY - 2;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY);
 
+                            }
+                            //detectar moneda der
+                            if (escMatriz[personajeX + 1][personajeY - 1] == Contenedor.moneda) {
+                                validarX = personajeX + 1;
+                                validarY = personajeY - 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "der");
+                            }
+                            //detectar moneda izq
+                            if (escMatriz[personajeX - 1][personajeY - 1] == Contenedor.moneda) {
+                                validarX = personajeX - 1;
+                                validarY = personajeY - 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "izq");
+                            }
+                            if (escMatriz[validarX][validarY] == Contenedor.personajeA) {
+                                contador++;
+                                Marcador();
+                            }
+                            personajeY--;
+
+                            System.out.println("C: " + contador);
+                        }
                     }
-                    //detectar moneda der
-                    if (escMatriz[personajeX + 1][personajeY - 1] == Contenedor.moneda) {
-                        validarX = personajeX + 1;
-                        validarY = personajeY - 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "der");
-                    }
-                    //detectar moneda izq
-                    if (escMatriz[personajeX - 1][personajeY - 1] == Contenedor.moneda) {
-                        validarX = personajeX - 1;
-                        validarY = personajeY - 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "izq");
-                    }
-                    if (escMatriz[validarX][validarY] == Contenedor.personajeA) {
-                        contador++;
-                        Marcador();
-                    }
-                    personajeY--;
-
-                    System.out.println("C: " + contador);
                 } else {
                     //sonido 
                 }
@@ -339,47 +352,52 @@ public class Escenario extends javax.swing.JFrame {
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeAb));
 
                 if (escMatriz[personajeX][personajeY + 1] != Contenedor.muro) {
+                    if (escMatriz[personajeX][personajeY + 1] != Contenedor.zombieD) {
+                        if (escMatriz[personajeX][personajeY + 1] != Contenedor.zombieI) {
 
-                    escMatriz[personajeX][personajeY + 1] = Contenedor.personajeAb;
-                    escMatriz[personajeX][personajeY] = Contenedor.suelo;
+                            escMatriz[personajeX][personajeY + 1] = Contenedor.personajeAb;
+                            escMatriz[personajeX][personajeY] = Contenedor.suelo;
 
-                    escenario[personajeX][personajeY + 1].setIcon(obtenerImagen(Contenedor.personajeAb));
-                    escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
+                            escenario[personajeX][personajeY + 1].setIcon(obtenerImagen(Contenedor.personajeAb));
+                            escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.suelo));
 
-                    System.out.println(personajeX + " " + (personajeY + 1));
-                    if (escMatriz[personajeX][personajeY + 2] == Contenedor.moneda) {
-                        validarX = personajeX;
-                        validarY = personajeY + 2;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY);
+                            System.out.println(personajeX + " " + (personajeY + 1));
+                            if (escMatriz[personajeX][personajeY + 2] == Contenedor.moneda) {
+                                validarX = personajeX;
+                                validarY = personajeY + 2;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY);
 
+                            }
+                            //detectar moneda izq
+                            if (escMatriz[personajeX + 1][personajeY + 1] == Contenedor.moneda) {
+                                validarX = personajeX + 1;
+                                validarY = personajeY + 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "izq");
+                            }
+                            //detectar moneda ser
+                            if (escMatriz[personajeX - 1][personajeY + 1] == Contenedor.moneda) {
+                                validarX = personajeX - 1;
+                                validarY = personajeY + 1;
+                                System.out.println("VX: " + validarX
+                                        + " VY: " + validarY + "der");
+                            }
+                            if (escMatriz[validarX][validarY] == Contenedor.personajeAb) {
+                                contador++;
+                                Marcador();
+                            }
+                            personajeY++;
+
+                            System.out.println("C: " + contador);
+                        }
                     }
-                    //detectar moneda izq
-                    if (escMatriz[personajeX + 1][personajeY + 1] == Contenedor.moneda) {
-                        validarX = personajeX + 1;
-                        validarY = personajeY + 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "izq");
-                    }
-                    //detectar moneda ser
-                    if (escMatriz[personajeX - 1][personajeY + 1] == Contenedor.moneda) {
-                        validarX = personajeX - 1;
-                        validarY = personajeY + 1;
-                        System.out.println("VX: " + validarX
-                                + " VY: " + validarY + "der");
-                    }
-                    if (escMatriz[validarX][validarY] == Contenedor.personajeAb) {
-                        contador++;
-                        Marcador();
-                    }
-                    personajeY++;
-
-                    System.out.println("C: " + contador);
                 } else {
                     //sonido 
                 }
                 break;
         }
+
 
     }//GEN-LAST:event_formKeyReleased
 
