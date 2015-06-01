@@ -2,6 +2,7 @@ package juego;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Escenario extends javax.swing.JFrame {
 
@@ -12,6 +13,8 @@ public class Escenario extends javax.swing.JFrame {
     private int personajeX = 2;
     private int personajeY = 2;
     int contador = 0;
+
+    int contVida = 3;
 
     public final int longImg = 40;
     public final int altImg = 40;
@@ -34,29 +37,30 @@ public class Escenario extends javax.swing.JFrame {
         play.repSonido();
 
         Marcador();
+
     }
 
     private int[][] crearEscenario() {
         int[][] esc = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},//Columna
             {1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 1},//1
-            {1, 0, 10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8, 1},//2
+            {1, 0, 10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 8, 1},//2
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1},//3
             {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},//4
             {1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 1, 1, 1},//5
-            {1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},//6
-            {1, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 21, 0, 0, 0, 1, 1, 1},//7
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1},//8
+            {1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 4, 1},//6
+            {1, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 21, 0, 0, 0, 1, 4, 1},//7
+            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 4, 1},//8
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//9
             {1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},//10
             {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1},//11
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//12
-            {1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//13
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//14
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1},//15
-            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1},//16
-            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1},//17
-            {1, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},//18
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1},//12
+            {1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1},//13
+            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 1},//14
+            {1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},//15
+            {1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1},//16
+            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 1},//17
+            {1, 0, 2, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},//18
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}//19
         };
         return esc;
@@ -98,6 +102,12 @@ public class Escenario extends javax.swing.JFrame {
                 return new ImageIcon(getClass().getResource("/Imagenes/ZD.png"));
             case Contenedor.zombieI:
                 return new ImageIcon(getClass().getResource("/Imagenes/ZI.png"));
+            case Contenedor.live:
+                return new ImageIcon(getClass().getResource("/Imagenes/L.gif"));
+            case Contenedor.bala:
+                return new ImageIcon(getClass().getResource("/Imagenes/B.gif"));
+            case Contenedor.municion:
+                return new ImageIcon(getClass().getResource("/Imagenes/BI.png"));
             default:
                 return new ImageIcon(getClass().getResource("/Imagenes/C.png"));
         }
@@ -137,6 +147,22 @@ public class Escenario extends javax.swing.JFrame {
                 escenario[3][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/siete.png")));
                 panelEscenario.add(escenario[3][20]);
                 break;
+        }
+    }
+
+    public void Vida() {
+
+        if (contVida == 2) {
+            escenario[8][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/LN.gif")));
+            panelEscenario.add(escenario[9][20]);
+        } else if (contVida == 1) {
+            escenario[7][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/LN.gif")));
+            panelEscenario.add(escenario[9][20]);
+        } else if (contVida == 0) {
+            escenario[6][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/LN.gif")));
+            panelEscenario.add(escenario[7][20]);
+
+            JOptionPane.showMessageDialog(null, "HAS MUERTO");
         }
     }
 
@@ -200,6 +226,7 @@ public class Escenario extends javax.swing.JFrame {
 
             case 32:
                 label_bala.setVisible(true);
+                label_bala.setBounds(personajeX, personajeY, 10, 10);
 
                 break;
             case 37:    //izq
@@ -246,11 +273,17 @@ public class Escenario extends javax.swing.JFrame {
                             personajeX--;
 
                             System.out.println("C: " + contador);
+                        } else {
+                            contVida--;
                         }
+                    } else {
+                        contVida--;
                     }
                 } else {
                     //sonido 
                 }
+                Vida();
+                System.out.println(contVida);
                 break;
             case 39:    //der
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeD));
@@ -294,11 +327,17 @@ public class Escenario extends javax.swing.JFrame {
                             personajeX++;
 
                             System.out.println("C: " + contador);
+                        } else {
+                            contVida--;
                         }
+                    } else {
+                        contVida--;
                     }
                 } else {
                     //sonido 
                 }
+                Vida();
+                System.out.println(contVida);
                 break;
             case 38:    //arr
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeA));
@@ -342,11 +381,17 @@ public class Escenario extends javax.swing.JFrame {
                             personajeY--;
 
                             System.out.println("C: " + contador);
+                        } else {
+                            contVida--;
                         }
+                    } else {
+                        contVida--;
                     }
                 } else {
                     //sonido 
                 }
+                Vida();
+                System.out.println(contVida);
                 break;
             case 40:    //ab
                 escenario[personajeX][personajeY].setIcon(obtenerImagen(Contenedor.personajeAb));
@@ -390,11 +435,17 @@ public class Escenario extends javax.swing.JFrame {
                             personajeY++;
 
                             System.out.println("C: " + contador);
+                        } else {
+                            contVida--;
                         }
+                    } else {
+                        contVida--;
                     }
                 } else {
                     //sonido 
                 }
+                Vida();
+                System.out.println(contVida);
                 break;
         }
 
