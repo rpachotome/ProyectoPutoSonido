@@ -7,7 +7,7 @@ import javax.swing.JLabel;
  *
  * @author Aitor
  */
-public class CrearEscenario{
+public class CrearEscenario {
     
     public CrearEscenario(){
         

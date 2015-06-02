@@ -15,7 +15,7 @@ public class Escenario extends javax.swing.JFrame {
     private int personajeY = 2;
 
     int contador = 0;
-    int contBalas = 2;
+    int contBalas = 6;
     int contVida = 3;
 
     public final int longImg = 40;
@@ -300,11 +300,15 @@ public class Escenario extends javax.swing.JFrame {
 
                             if (escMatriz[validarMX][validarMY] == Contenedor.personajeI) {
                                 contador++;
+                                validarMX=0;
+                                validarMY=0;
                                 Marcador();
                             }
 
                             if (escMatriz[validarBX][validarBY] == Contenedor.personajeI) {
                                 contBalas++;
+                                validarBX=0;
+                                validarBY=0;
                                 System.out.println(contBalas);
                                 Cargador();
                             }
@@ -383,11 +387,15 @@ public class Escenario extends javax.swing.JFrame {
 
                             if (escMatriz[validarMX][validarMY] == Contenedor.personajeD) {
                                 contador++;
+                                validarMX=0;
+                                validarMY=0;
                                 Marcador();
                             }
 
                             if (escMatriz[validarBX][validarBY] == Contenedor.personajeD) {
                                 contBalas++;
+                                validarBX=0;
+                                validarBY=0;
                                 System.out.println(contBalas);
                                 Cargador();
                             }
@@ -467,11 +475,15 @@ public class Escenario extends javax.swing.JFrame {
 
                             if (escMatriz[validarMX][validarMY] == Contenedor.personajeA) {
                                 contador++;
+                                validarMX=0;
+                                validarMY=0;
                                 Marcador();
                             }
 
                             if (escMatriz[validarBX][validarBY] == Contenedor.personajeA) {
                                 contBalas++;
+                                validarBX=0;
+                                validarBY=0;
                                 System.out.println(contBalas);
                                 Cargador();
                             }
@@ -496,6 +508,7 @@ public class Escenario extends javax.swing.JFrame {
                 if (escMatriz[personajeX][personajeY + 1] != Contenedor.muro) {
                     if (escMatriz[personajeX][personajeY + 1] != Contenedor.zombieD) {
                         if (escMatriz[personajeX][personajeY + 1] != Contenedor.zombieI) {
+                            if(escMatriz[personajeX][personajeY + 1] != Contenedor.bala) {//&& contBalas!=6){
 
                             escMatriz[personajeX][personajeY + 1] = Contenedor.personajeAb;
                             escMatriz[personajeX][personajeY] = Contenedor.suelo;
@@ -549,17 +562,22 @@ public class Escenario extends javax.swing.JFrame {
 
                             if (escMatriz[validarMX][validarMY] == Contenedor.personajeAb) {
                                 contador++;
+                                validarMX=0;
+                                validarMY=0;
                                 Marcador();
                             }
 
                             if (escMatriz[validarBX][validarBY] == Contenedor.personajeAb) {
                                 contBalas++;
+                                validarBX=0;
+                                validarBY=0;
                                 System.out.println(contBalas);
                                 Cargador();
                             }
                             personajeY++;
 
                             System.out.println("C: " + contador);
+                            }
                         } else {
                             contVida--;
                         }
