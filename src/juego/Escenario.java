@@ -13,9 +13,9 @@ public class Escenario extends javax.swing.JFrame {
     private int numFilas = 22;
     private int personajeX = 2;
     private int personajeY = 2;
-    int contador = 0;
 
-    int contBalas = 1;
+    int contador = 0;
+    int contBalas = 2;
     int contVida = 3;
 
     public final int longImg = 40;
@@ -29,6 +29,7 @@ public class Escenario extends javax.swing.JFrame {
 
     private int[][] escMatriz = new int[numColumnas][numFilas];
     JLabel[][] escenario = new JLabel[numColumnas][numFilas];
+    
 
     public Escenario() {
 
@@ -45,6 +46,8 @@ public class Escenario extends javax.swing.JFrame {
         Marcador();
 
         Cargador();
+
+        Vida();
 
     }
 
@@ -120,19 +123,49 @@ public class Escenario extends javax.swing.JFrame {
             escenario[12][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
             panelEscenario.add(escenario[12][20]);
         } else if (contBalas == 2) {
+            escenario[12][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[12][20]);
             escenario[13][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
             panelEscenario.add(escenario[13][20]);
         } else if (contBalas == 3) {
+            escenario[12][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[12][20]);
+            escenario[13][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[13][20]);
             escenario[14][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
             panelEscenario.add(escenario[14][20]);
         } else if (contBalas == 4) {
+            escenario[12][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[12][20]);
+            escenario[13][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[13][20]);
+            escenario[14][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[14][20]);
             escenario[15][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
             panelEscenario.add(escenario[15][20]);
         } else if (contBalas == 5) {
+            escenario[12][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[12][20]);
+            escenario[13][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[13][20]);
+            escenario[14][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[14][20]);
+            escenario[15][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[15][20]);
             escenario[16][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
             panelEscenario.add(escenario[16][20]);
 
         } else if (contBalas == 6) {
+            escenario[12][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[12][20]);
+            escenario[13][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[13][20]);
+            escenario[14][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[14][20]);
+            escenario[15][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[15][20]);
+            escenario[16][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
+            panelEscenario.add(escenario[16][20]);
             escenario[17][20].setIcon(new ImageIcon(getClass().getResource("/Imagenes/BI.png")));
             panelEscenario.add(escenario[17][20]);
         } else {
@@ -200,6 +233,10 @@ public class Escenario extends javax.swing.JFrame {
             case 32:
                 label_bala.setVisible(true);
                 contBalas--;
+                while(label_bala!=null){
+                    //label_bala.setBounds(escenario[personajeX][personajeY]+40,escenario[personajeX][personajeY]+20 10, 10);
+                }
+                System.out.println(contBalas);
                 Cargador();
 
                 break;
@@ -354,7 +391,7 @@ public class Escenario extends javax.swing.JFrame {
                                 System.out.println(contBalas);
                                 Cargador();
                             }
-                            
+
                             personajeX++;
 
                             System.out.println("C: " + contador);
@@ -405,11 +442,11 @@ public class Escenario extends javax.swing.JFrame {
                                 System.out.println("VX: " + validarMX
                                         + " VY: " + validarMY + "izq");
                             }
-                            
+
                             //Detectar bala en frente
-                            if (escMatriz[personajeX][personajeY-2] == Contenedor.bala) {
-                                validarBX = personajeX ;
-                                validarBY = personajeY-2;
+                            if (escMatriz[personajeX][personajeY - 2] == Contenedor.bala) {
+                                validarBX = personajeX;
+                                validarBY = personajeY - 2;
                                 System.out.println("VBX: " + validarMX
                                         + " VBY: " + validarMY);
                             }
@@ -490,7 +527,7 @@ public class Escenario extends javax.swing.JFrame {
                             }
                             //Detectar bala en frente
                             if (escMatriz[personajeX][personajeY + 2] == Contenedor.bala) {
-                                validarBX = personajeX ;
+                                validarBX = personajeX;
                                 validarBY = personajeY + 2;
                                 System.out.println("VBX: " + validarMX
                                         + " VBY: " + validarMY);
